@@ -1,0 +1,141 @@
+[gd_scene load_steps=14 format=3 uid="uid://b1o2rlm0wd2al"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_gu4s2"]
+[ext_resource type="Texture2D" uid="uid://binb7qw5mbl4b" path="res://asset/sprites/Orange Mushroom/stand_1.png" id="1_y0lgy"]
+[ext_resource type="Texture2D" uid="uid://bef8w317etf7k" path="res://asset/sprites/Orange Mushroom/stand_0.png" id="2_itq70"]
+[ext_resource type="Texture2D" uid="uid://bqocncxt7k1rn" path="res://asset/sprites/Orange Mushroom/jump_0.png" id="3_tp6nk"]
+[ext_resource type="Texture2D" uid="uid://bsq7ofs5ud74m" path="res://asset/sprites/Orange Mushroom/move_0.png" id="4_ggm2s"]
+[ext_resource type="Texture2D" uid="uid://deetupwjfmhf6" path="res://asset/sprites/Orange Mushroom/move_1.png" id="5_n15sn"]
+[ext_resource type="Texture2D" uid="uid://d2cr5fegj04sa" path="res://asset/sprites/Orange Mushroom/move_2.png" id="6_w3347"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v2men"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = false
+properties/0/replication_mode = 2
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = false
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:flip_h")
+properties/2/spawn = false
+properties/2/replication_mode = 2
+properties/3/path = NodePath("AnimatedSprite2D:frame")
+properties/3/spawn = false
+properties/3/replication_mode = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bixx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y0lgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_itq70")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_w3347")
+}],
+"loop": true,
+"name": &"hehe",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tp6nk")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ggm2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_n15sn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_w3347")
+}],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48pjo"]
+size = Vector2(4.25, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ogq5"]
+size = Vector2(37, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ygfn"]
+size = Vector2(37, 20.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1odu"]
+size = Vector2(37, 4)
+
+[node name="Player" type="CharacterBody2D" groups=["player", "pushable", "pusher"]]
+collision_layer = 128
+collision_mask = 129
+slide_on_ceiling = false
+script = ExtResource("1_gu4s2")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v2men")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0bixx")
+animation = &"hehe"
+
+[node name="left" type="Area2D" parent="." groups=["pusher"]]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left"]
+position = Vector2(-19.875, 6.5)
+shape = SubResource("RectangleShape2D_48pjo")
+
+[node name="right" type="Area2D" parent="." groups=["pusher"]]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right"]
+position = Vector2(21, 6)
+shape = SubResource("RectangleShape2D_48pjo")
+
+[node name="down" type="Area2D" parent="." groups=["carriable"]]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="down"]
+position = Vector2(0.5, 25)
+shape = SubResource("RectangleShape2D_1ogq5")
+
+[node name="up" type="Area2D" parent="." groups=["carrier"]]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="up"]
+position = Vector2(0.5, -11)
+shape = SubResource("RectangleShape2D_1ogq5")
+
+[node name="collision_down" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 13.25)
+shape = SubResource("RectangleShape2D_6ygfn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, -8)
+shape = SubResource("RectangleShape2D_h1odu")
+
+[connection signal="area_entered" from="left" to="." method="_on_left_area_entered"]
+[connection signal="area_exited" from="left" to="." method="_on_left_area_exited"]
+[connection signal="area_entered" from="right" to="." method="_on_right_area_entered"]
+[connection signal="area_exited" from="right" to="." method="_on_right_area_exited"]
+[connection signal="area_entered" from="up" to="." method="_on_up_area_entered"]
+[connection signal="area_exited" from="up" to="." method="_on_up_area_exited"]

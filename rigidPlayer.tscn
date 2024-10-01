@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://ceb2sl0ytccuj"]
+
+[ext_resource type="Script" path="res://rigid_player.gd" id="1_n0a11"]
+[ext_resource type="Texture2D" uid="uid://binb7qw5mbl4b" path="res://asset/sprites/Orange Mushroom/stand_1.png" id="2_4s12s"]
+[ext_resource type="Texture2D" uid="uid://bef8w317etf7k" path="res://asset/sprites/Orange Mushroom/stand_0.png" id="3_lhvb7"]
+[ext_resource type="Texture2D" uid="uid://d2cr5fegj04sa" path="res://asset/sprites/Orange Mushroom/move_2.png" id="4_wag7l"]
+[ext_resource type="Texture2D" uid="uid://bqocncxt7k1rn" path="res://asset/sprites/Orange Mushroom/jump_0.png" id="5_3qtgv"]
+[ext_resource type="Texture2D" uid="uid://bsq7ofs5ud74m" path="res://asset/sprites/Orange Mushroom/move_0.png" id="6_ffyfl"]
+[ext_resource type="Texture2D" uid="uid://deetupwjfmhf6" path="res://asset/sprites/Orange Mushroom/move_1.png" id="7_oukee"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5lpvo"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v2men"]
+properties/0/path = NodePath("AnimatedSprite2D:animation")
+properties/0/spawn = false
+properties/0/replication_mode = 0
+properties/1/path = NodePath("AnimatedSprite2D:flip_h")
+properties/1/spawn = false
+properties/1/replication_mode = 0
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = false
+properties/2/replication_mode = 0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bixx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4s12s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lhvb7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wag7l")
+}],
+"loop": true,
+"name": &"hehe",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3qtgv")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ffyfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_oukee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wag7l")
+}],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5ccx"]
+
+[node name="Player" type="RigidBody2D" groups=["pushable", "pusher"]]
+collision_layer = 129
+physics_material_override = SubResource("PhysicsMaterial_5lpvo")
+can_sleep = false
+lock_rotation = true
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_n0a11")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v2men")
+visibility_update_mode = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0bixx")
+animation = &"hehe"
+
+[node name="JustAiredTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_v5ccx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -10.0
+offset_top = 27.0
+offset_right = 10.0
+offset_bottom = 50.0
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 2

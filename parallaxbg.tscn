@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1p7qrby5j45c"]
+
+[ext_resource type="Texture2D" uid="uid://bm1nbj2op1jgo" path="res://asset/background/ff6bb63ec21e98f570aa660e1290557f.png" id="1_mntt6"]
+
+[node name="parallaxbg" type="ParallaxBackground"]
+scale = Vector2(0.96, 0.934971)
+transform = Transform2D(0.96, 0, 0, 0.934971, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(602.083, 351.883)
+texture = ExtResource("1_mntt6")

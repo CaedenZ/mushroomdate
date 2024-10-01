@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://xo0em0nie06o"]
+
+[ext_resource type="Script" path="res://pushable.gd" id="1_yqpmr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acmhs"]
+size = Vector2(0.625, 24)
+
+[node name="PushableComponent" type="Node2D"]
+script = ExtResource("1_yqpmr")
+
+[node name="left" type="Area2D" parent="."]
+position = Vector2(-1, 12)
+collision_layer = 0
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left"]
+position = Vector2(-24, 0)
+shape = SubResource("RectangleShape2D_acmhs")
+
+[node name="right" type="Area2D" parent="."]
+position = Vector2(-2, 12)
+collision_layer = 129
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_acmhs")
