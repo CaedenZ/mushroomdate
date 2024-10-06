@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://r8frotqk1lg2"]
+
+[ext_resource type="Texture2D" uid="uid://dog7ucv0w20d6" path="res://asset/sprites/Box.png" id="1_32o28"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7nyw"]
+atlas = ExtResource("1_32o28")
+region = Rect2(0, 0, 64, 43)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qudx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7nyw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+lock_rotation = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0qudx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, -14, 23, -14, 23, 18, 21, 20, -21, 20, -24, 18)

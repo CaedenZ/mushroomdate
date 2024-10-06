@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="mushroom"
-run/main_scene="res://MainScene.tscn"
+run/main_scene="res://MultiplayerScene.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameManager="*res://GameManager.gd"
+Transitions="*res://transitions.tscn"
 
 [editor]
 
