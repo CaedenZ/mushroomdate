@@ -28,11 +28,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			position.y =carriedby.position.y + -30
 			
-		if is_on_floor():
-			var highest_y = 0
-			for moving_platform: CharacterBody2D in $down.get_overlapping_bodies(): # only check moving platforms layer
-				highest_y = moving_platform.velocity.y # moving platforms need to expose their velocity
-			velocity.y += highest_y # apply vertical platform movement
+		
 		# Handle jump.
 		if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or carried):
 			jump()
@@ -122,3 +118,10 @@ func _on_right_area_exited(area: Area2D) -> void:
 		#area.get_parent().carried = false
 		##area.get_parent().enable_down_coll()
 		#carrying = null
+
+
+func _on_down_body_entered(body: Node2D) -> void:
+	print(body)
+	if body.is_in_group("coil"):
+		print("aa")
+		velocity.y = JUMP_VELOCITY * 2.5

@@ -109,9 +109,7 @@ collision_mask = 128
 position = Vector2(21, 6)
 shape = SubResource("RectangleShape2D_48pjo")
 
-[node name="down" type="Area2D" parent="." groups=["carriable"]]
-collision_layer = 64
-collision_mask = 64
+[node name="down" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="down"]
 position = Vector2(0.5, 25)
@@ -139,5 +137,6 @@ shape = SubResource("RectangleShape2D_h1odu")
 [connection signal="area_exited" from="left" to="." method="_on_left_area_exited"]
 [connection signal="area_entered" from="right" to="." method="_on_right_area_entered"]
 [connection signal="area_exited" from="right" to="." method="_on_right_area_exited"]
+[connection signal="body_entered" from="down" to="." method="_on_down_body_entered"]
 [connection signal="area_entered" from="up" to="." method="_on_up_area_entered"]
 [connection signal="area_exited" from="up" to="." method="_on_up_area_exited"]

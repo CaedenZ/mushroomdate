@@ -28,6 +28,7 @@ version_control/autoload_on_startup=true
 
 portal=""
 multigameplayer=""
+coil=""
 
 [physics]
 
