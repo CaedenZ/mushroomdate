@@ -16,8 +16,6 @@ func _ready() -> void:
 		var currentPlayer = PlayerScene.instantiate()
 		currentPlayer.name = str(GameManager.players[i].id)
 		add_child(currentPlayer)
-		print(str(GameManager.players[i].id))
-		print(str(multiplayer.get_unique_id()))
 		if currentPlayer.name == str(multiplayer.get_unique_id()):
 			var remote:RemoteTransform2D = currentPlayer.get_child(0)
 			remote.remote_path = $Camera2D.get_path()
@@ -35,10 +33,9 @@ func _process(delta: float) -> void:
 func player_complete(body: CharacterBody2D):
 	body.queue_free()
 	player_completed += 1
-	print(player_completed)
-	print(player_count)
 	if player_completed == player_count:
-		loadnextScene(scene_no + 1)
+		scene_no += 1
+		loadnextScene(scene_no)
 
 #@rpc("any_peer","call_local")
 func loadnextScene(scenenum):
@@ -50,8 +47,6 @@ func loadnextScene(scenenum):
 		var currentPlayer = PlayerScene.instantiate()
 		currentPlayer.name = str(GameManager.players[i].id)
 		add_child(currentPlayer)
-		print(str(GameManager.players[i].id))
-		print(str(multiplayer.get_unique_id()))
 		if currentPlayer.name == str(multiplayer.get_unique_id()):
 			var remote:RemoteTransform2D = currentPlayer.get_child(0)
 			remote.remote_path = $Camera2D.get_path()

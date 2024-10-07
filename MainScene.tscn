@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://der0xgsc04tw8"]
+[gd_scene load_steps=15 format=4 uid="uid://der0xgsc04tw8"]
 
 [ext_resource type="Script" path="res://script/SceneManager.gd" id="1_ydrv6"]
 [ext_resource type="PackedScene" uid="uid://b1o2rlm0wd2al" path="res://Player.tscn" id="2_sxy8b"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://uhqmugup218s" path="res://portal.tscn" id="6_owpwi"]
 [ext_resource type="PackedScene" uid="uid://r8frotqk1lg2" path="res://box.tscn" id="7_bogyg"]
 [ext_resource type="PackedScene" uid="uid://daujjnuggclmb" path="res://Coil.tscn" id="9_0vu3y"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5rjyl"]
+properties/0/path = NodePath("box:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7po4n"]
 texture = ExtResource("4_t4o4f")
@@ -309,15 +314,13 @@ texture = ExtResource("5_pwdfn")
 [sub_resource type="TileSet" id="TileSet_glal0"]
 sources/0 = SubResource("TileSetAtlasSource_d6lyo")
 
-[node name="Node2D" type="Node2D"]
+[node name="Stage1" type="Node2D"]
 script = ExtResource("1_ydrv6")
 PlayerScene = ExtResource("2_sxy8b")
 bg = ExtResource("3_5sfn8")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player.tscn")
-spawn_path = NodePath("../SpawnPoint")
-spawn_limit = 5
+[node name="Multiplayer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5rjyl")
 
 [node name="TileMap" type="Node2D" parent="."]
 
@@ -339,11 +342,10 @@ position = Vector2(154, 143)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_387hf")
-autoplay = true
 parameters/looping = true
 
 [node name="portal" parent="." node_paths=PackedStringArray("scene") instance=ExtResource("6_owpwi")]
-position = Vector2(154, 342)
+position = Vector2(619, 490)
 scene = NodePath("..")
 
 [node name="portal2" parent="." node_paths=PackedStringArray("scene") instance=ExtResource("6_owpwi")]
@@ -355,7 +357,7 @@ position = Vector2(1350, 431)
 scene = NodePath("..")
 
 [node name="box" parent="." groups=["box"] instance=ExtResource("7_bogyg")]
-position = Vector2(214, 323)
+position = Vector2(449, 259)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -363,4 +365,4 @@ position_smoothing_enabled = true
 [node name="parallaxbg" parent="Camera2D" instance=ExtResource("3_5sfn8")]
 
 [node name="Coil" parent="." instance=ExtResource("9_0vu3y")]
-position = Vector2(262, 552)
+position = Vector2(112, 553)

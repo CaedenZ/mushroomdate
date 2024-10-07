@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://daujjnuggclmb"]
+[gd_scene load_steps=16 format=3 uid="uid://daujjnuggclmb"]
 
+[ext_resource type="Script" path="res://coil.gd" id="1_5vn5h"]
 [ext_resource type="Texture2D" uid="uid://br200b3ornggg" path="res://asset/sprites/Cube Slime/stand_0.png" id="1_iyrpv"]
 [ext_resource type="Texture2D" uid="uid://gn5fy6laedkx" path="res://asset/sprites/Cube Slime/stand_1.png" id="2_epij6"]
 [ext_resource type="Texture2D" uid="uid://b61q85skl1nhd" path="res://asset/sprites/Cube Slime/stand_2.png" id="3_b541k"]
@@ -66,10 +67,10 @@ animations = [{
 size = Vector2(38, 28)
 
 [node name="Coil" type="StaticBody2D" groups=["coil"]]
+script = ExtResource("1_5vn5h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_skt4a")
-frame_progress = 0.142826
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

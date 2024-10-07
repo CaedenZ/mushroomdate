@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var MOVE_SPEED = 100
 var PUSH_SPEED = 70
-const JUMP_VELOCITY = -200.0
+const JUMP_VELOCITY = -210.0
 var hehe = false
 var push = false
 var push_direction = 0
@@ -60,6 +60,8 @@ func _physics_process(delta: float) -> void:
 			var box = col.get_collider()
 			if box.is_in_group("box") :
 				box.linear_velocity = col.get_normal() * -boxpushspeed
+			elif box.is_in_group("coil") :
+				velocity.y = JUMP_VELOCITY * 2.5
 		move_and_slide()
 	#else:
 		#global_position = global_position.lerp(syncposition, .5)
@@ -118,10 +120,3 @@ func _on_right_area_exited(area: Area2D) -> void:
 		#area.get_parent().carried = false
 		##area.get_parent().enable_down_coll()
 		#carrying = null
-
-
-func _on_down_body_entered(body: Node2D) -> void:
-	print(body)
-	if body.is_in_group("coil"):
-		print("aa")
-		velocity.y = JUMP_VELOCITY * 2.5
