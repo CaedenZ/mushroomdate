@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://uhqmugup218s"]
 
-[ext_resource type="Script" path="res://portal.gd" id="1_7fkrp"]
+[ext_resource type="Script" path="res://script/portal.gd" id="1_7fkrp"]
 [ext_resource type="Texture2D" uid="uid://cyq7qty70kkyw" path="res://asset/portal/free_crystal_dark_frakassets/crystal_dark_32x32_12f_20d.png" id="1_smjhw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqlyc"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://b1o2rlm0wd2al"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_gu4s2"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_gu4s2"]
 [ext_resource type="Texture2D" uid="uid://binb7qw5mbl4b" path="res://asset/sprites/Orange Mushroom/stand_1.png" id="1_y0lgy"]
 [ext_resource type="Texture2D" uid="uid://bef8w317etf7k" path="res://asset/sprites/Orange Mushroom/stand_0.png" id="2_itq70"]
 [ext_resource type="Texture2D" uid="uid://bqocncxt7k1rn" path="res://asset/sprites/Orange Mushroom/jump_0.png" id="3_tp6nk"]
